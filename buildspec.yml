@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+            - project_name=aws_project
+            - /bin/bash codebuild/install.sh
+    pre_build:
+        commands:
+            - /bin/bash codebuild/prebuild.sh
+    build:
+        commands:
+            - /bin/bash codebuild/build.sh
+    post_build:
+        commands:
+            - /bin/bash codebuild/postbuild.sh
+            
+artifacts:
+    files:
+        - cloudformation_deploy.yml
+    secondary-artifacts:
+        BuildArtifact:
+            files:
+                - cloudformation_deploy.yml
